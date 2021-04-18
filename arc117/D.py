@@ -17,26 +17,16 @@ class TestClass(unittest.TestCase):
 
     def test_入力例_1(self):
         input = """2
-2
-2
-100"""
-        output = """2"""
+1 2"""
+        output = """2 1"""
         self.assertIO(input, output)
 
     def test_入力例_2(self):
-        input = """5
-1
-0
-150"""
-        output = """0"""
-        self.assertIO(input, output)
-
-    def test_入力例_3(self):
-        input = """30
-40
-50
-6000"""
-        output = """213"""
+        input = """4
+1 2
+1 4
+2 3"""
+        output = """3 2 1 4"""
         self.assertIO(input, output)
 
 

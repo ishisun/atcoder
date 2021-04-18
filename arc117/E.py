@@ -16,27 +16,33 @@ class TestClass(unittest.TestCase):
         self.assertEqual(out, output)
 
     def test_入力例_1(self):
-        input = """2
-2
-2
-100"""
+        input = """1 1"""
         output = """2"""
         self.assertIO(input, output)
 
     def test_入力例_2(self):
-        input = """5
-1
-0
-150"""
-        output = """0"""
+        input = """2 3"""
+        output = """2"""
         self.assertIO(input, output)
 
     def test_入力例_3(self):
-        input = """30
-40
-50
-6000"""
-        output = """213"""
+        input = """3 7"""
+        output = """6"""
+        self.assertIO(input, output)
+
+    def test_入力例_4(self):
+        input = """8 24"""
+        output = """568"""
+        self.assertIO(input, output)
+
+    def test_入力例_5(self):
+        input = """30 230"""
+        output = """761128315856702"""
+        self.assertIO(input, output)
+
+    def test_入力例_6(self):
+        input = """25 455"""
+        output = """0"""
         self.assertIO(input, output)
 
 
