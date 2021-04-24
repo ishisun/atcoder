@@ -5,21 +5,7 @@ import unittest
 def resolve():
     N = int(input())
     a = list(map(int, input().split()))
-    dp = [500*10**9]*N
-    dp[N-1] = 0
-    for i in range(N-1, 0, -1):
-        for k in range(0,i-1):
-            c = [0] * i
-            c[k] = a[k] + a[k+1]
-        k = c.index(min(c))
-        dp[i-1] = min(dp[i-1],dp[i] + c[k])
-        if k == 0:
-            a = c[k:k] + a[k+1:-1]
-        elif k == i-2:
-            a = a[0:k-1] + c[k:k]
-        else:
-            a = a[0:k-1] + c[k:k] +a[k+2:-1]
-    print(dp[1])
+    dp[i][j] = [[0]*3 for _ in range(N+1)]
 
 
 
