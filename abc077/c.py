@@ -1,21 +1,19 @@
 import sys
 from io import StringIO
 import unittest
+import bisect
 
 def resolve():
     N = int(input())
-    a = list(map(int, input().split()))
-    s = [0]*(N+1)
-    dp = [[500*10**20]*(N+1) for _ in range(N+1)]
+    A = list(map(int,input().split()))
+    B = list(map(int,input().split()))
+    C = list(map(int,input().split()))
+    A.sort()
+    C.sort()
+    count = 0
     for i in range(N):
-        dp[i][i+1] = 0
-        s[i+1] = s[i] + a[i]
-    for dif in range(2,N+1):
-        for i in range(N-dif+1):
-            j =  i + dif
-            for k in range(i+1,j):
-                dp[i][j] = min(dp[i][j], dp[i][k] + dp[k][j] + s[j]-s[i])
-    print(dp[0][N])
+        count += bisect.bisect_left(A,B[i]) * (N - bisect.bisect_right(C,B[i]))
+    print(count)
 
 class TestClass(unittest.TestCase):
     def assertIO(self, input, output):
@@ -28,27 +26,27 @@ class TestClass(unittest.TestCase):
         self.assertEqual(out, output)
 
     def test_入力例_1(self):
-        input = """4
-10 20 30 40"""
-        output = """190"""
+        input = """2
+1 5
+2 4
+3 6"""
+        output = """3"""
         self.assertIO(input, output)
 
     def test_入力例_2(self):
-        input = """5
-10 10 10 10 10"""
-        output = """120"""
+        input = """3
+1 1 1
+2 2 2
+3 3 3"""
+        output = """27"""
         self.assertIO(input, output)
 
     def test_入力例_3(self):
-        input = """3
-1000000000 1000000000 1000000000"""
-        output = """5000000000"""
-        self.assertIO(input, output)
-
-    def test_入力例_4(self):
         input = """6
-7 6 8 6 1 1"""
-        output = """68"""
+3 14 159 2 6 53
+58 9 79 323 84 6
+2643 383 2 79 50 288"""
+        output = """87"""
         self.assertIO(input, output)
 
 
