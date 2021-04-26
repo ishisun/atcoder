@@ -1,13 +1,30 @@
 import sys
 from io import StringIO
 import unittest
+import bisect
 
 def resolve():
-    N, K = int(input().split())
+    N, K = map(int,input().split())
     a = list(map(int,list(input().split())))
     b = list(map(int,list(input().split())))
-    C = max(a) * max(b)
-    c = range() 
+    a.sort()
+    b.sort()
+    C = a[-1] * b[-1]
+    c = range(1,C+1)
+    left = 0
+    right = C
+    while left < right - 1:
+        center = (left + right)//2
+        count = 0
+        for i in range(N):
+            count += bisect.bisect_right(b, center//a[i])
+        if  K <= count:
+            right = center
+        else:
+            left = center
+    print(right)
+
+
 
 class TestClass(unittest.TestCase):
     def assertIO(self, input, output):
