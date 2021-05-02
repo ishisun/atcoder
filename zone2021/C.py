@@ -5,9 +5,17 @@ import unittest
 def resolve():
     N = int(input())
     spec = [list(map(int, input().split())) for _ in range(N)]
-    A, B, C, D, E = [list(i) for i in zip(*spec)]
-    team = [max(spec[0][:]), max(spec[1][:]), max(spec[2][:]), max(spec[0:3][3]),max(spec[0:3][4])]
-
+    dp = [[[0, 0, 0, 0, 0] for _ in range(4)] for i in range(N+1)]
+    for i in range(N):
+        for j in range(3):
+            dp_min =min(dp[i][j])
+            b = dp[i][j].index(dp_min)
+            if spec[i][b] > dp_min:
+                dp[i+1][j+1] = dp[i][j]
+                
+            else:
+                dp[i+1][j+1] = dp[i][j+1]
+    print(min(dp[N][3]))
 
 
 class TestClass(unittest.TestCase):
